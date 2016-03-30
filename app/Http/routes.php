@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->intended('home');
 });
 
 /*
@@ -28,4 +28,15 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function () {
     //
+});
+
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/login', 'AuthController@login');
+	Route::get('/auth', 'AuthController@auth');
+    Route::get('/home', ['as' => 'home', 'uses' => 'HomeController@index']);
+	Route::post('/join', ['as' => 'join', 'uses' => 'HomeController@join']);
+	Route::get('/groups', ['as' => 'groups', 'uses' => 'GroupsController@index']);
+	Route::post('/create_group', ['as' => 'create_group', 'uses' => 'GroupsController@create']);
+	Route::post('/kick', ['as' => 'kick', 'uses' => 'GroupsController@kick']);
+	Route::post('/delete_group', ['as' => 'delete_group', 'uses' => 'GroupsController@delete']);
 });
