@@ -78,4 +78,17 @@ class GroupsController extends Controller {
 		$group = Group::find($groupId);
 		$group->delete();
 	}
+
+	public function printGroups(Request $request) {
+		if (!Auth::check() || !Auth::User()->isAdmin()) {
+			return redirect()->intended('login');
+		}
+
+		$admin = false;
+		if (Auth::User()->isAdmin()) {
+			$admin = true;
+		}
+
+		return view('print_groups', ['groups' => Group::all(), 'admin' => $admin]);
+	}
 }

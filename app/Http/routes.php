@@ -39,4 +39,5 @@ Route::group(['middleware' => 'web'], function () {
 	Route::post('/create_group', ['as' => 'create_group', 'uses' => 'GroupsController@create']);
 	Route::post('/kick', ['as' => 'kick', 'uses' => 'GroupsController@kick']);
 	Route::post('/delete_group', ['as' => 'delete_group', 'uses' => 'GroupsController@delete']);
+	Route::get('/print', ['as' => 'print', 'uses' => 'GroupsController@printGroups']);
 });

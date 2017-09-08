@@ -1,23 +1,24 @@
 @extends('layouts.app')
+<style>
+@media print {
+	.panel {
+		page-break-inside: avoid;
+	}
 
+	.btn {
+		visibility: hidden;
+	}
+}
+</style>
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+			@foreach ($groups as $group)
             <div class="panel panel-default">
 				<table class="table">
-					<thead>
-						<tr>
-							<th>
-								Groups
-							</th>
-							<th>
-								Students
-							</th>
-						</tr>
-					</thead>
 					<tbody>
-				@foreach ($groups as $group)
+				
 					<tr>
 						<td>
 							{{ $group->name }}
@@ -33,13 +34,14 @@
 					@endforeach
 						</td>
 					</tr>
-				@endforeach
+				
 					</tbody>
 				</table>
-				<div class="col-md-1 col-md-offset-10">
-					<button class="js-add-group btn btn-primary" data-toggle="modal" data-target="#groupModal">Create New Group</button>
-				</div>
             </div>
+			@endforeach
+			<div class="col-md-1 col-md-offset-10">
+				<button class="js-add-group btn btn-primary" data-toggle="modal" data-target="#groupModal">Create New Group</button>
+			</div>
         </div>
     </div>
 </div>
